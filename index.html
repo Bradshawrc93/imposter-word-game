@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imposter Word Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Home Screen -->
+        <div id="home-screen" class="screen active">
+            <h1>🎭 Imposter Word Game</h1>
+            <p class="subtitle">Can you spot the imposters?</p>
+            <button id="start-game" class="btn btn-primary">Start New Game</button>
+        </div>
+
+        <!-- Setup Screen -->
+        <div id="setup-screen" class="screen">
+            <h2>Game Setup</h2>
+            <div class="setup-form">
+                <div class="input-group">
+                    <label for="num-players">Number of Players:</label>
+                    <input type="number" id="num-players" min="3" max="10" value="4">
+                </div>
+                <div class="input-group">
+                    <label for="num-imposters">Number of Imposters:</label>
+                    <input type="number" id="num-imposters" min="1" max="3" value="1">
+                </div>
+                <button id="begin-game" class="btn btn-primary">Begin Game</button>
+                <button id="back-to-home" class="btn btn-secondary">Back</button>
+            </div>
+        </div>
+
+        <!-- Player View Screen -->
+        <div id="player-screen" class="screen">
+            <h2 id="player-title">Pass to Player 1</h2>
+            <div id="player-ready">
+                <p>Ready to see your role?</p>
+                <button id="view-role" class="btn btn-primary">View</button>
+            </div>
+            <div id="role-reveal" class="hidden">
+                <div id="role-display"></div>
+                <button id="next-player" class="btn btn-primary">Next Player</button>
+            </div>
+        </div>
+
+        <!-- Play Screen -->
+        <div id="play-screen" class="screen">
+            <h2>Ready to Play!</h2>
+            <p class="instructions">All players have viewed their roles.<br>Now discuss and try to identify the imposters!</p>
+            <button id="start-discussion" class="btn btn-primary">Play</button>
+        </div>
+
+        <!-- Game Complete Screen -->
+        <div id="complete-screen" class="screen">
+            <h2>Game Complete!</h2>
+            <div class="game-info">
+                <p>Word: <span id="game-word"></span></p>
+                <p>Players: <span id="game-players"></span></p>
+                <p>Imposters: <span id="game-imposters"></span></p>
+            </div>
+            <button id="new-game" class="btn btn-primary">Start New Game</button>
+            <button id="back-to-game" class="btn btn-secondary">Back to Home</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
