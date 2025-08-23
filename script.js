@@ -1,4 +1,4 @@
-// Game state
+// Game state - v2.0 with categories
 let gameState = {
     numPlayers: 4,
     numImposters: 1,
