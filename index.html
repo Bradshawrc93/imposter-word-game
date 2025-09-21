@@ -13,6 +13,59 @@
             <h1>🎭 Imposter Word Game</h1>
             <p class="subtitle">Can you spot the imposters?</p>
             <button id="start-game" class="btn btn-primary">Start New Game</button>
+            <button id="show-instructions" class="btn btn-secondary">Instructions</button>
+        </div>
+
+        <!-- Instructions Screen -->
+        <div id="instructions-screen" class="screen">
+            <h2>📋 How to Play</h2>
+            <div class="instructions-content">
+                <div class="instruction-step">
+                    <h3>🎯 Setup</h3>
+                    <p>• Choose 3-10 players<br>
+                    • Select 1-5 imposters<br>
+                    • Pick a category or go random<br>
+                    • <strong>Player 1 is never an imposter</strong> (they manage the device)<br>
+                    • Most players get the <strong>secret word</strong>, imposters get <strong>"IMPOSTER"</strong></p>
+                </div>
+                
+                <div class="instruction-step">
+                    <h3>🎮 Giving Clues</h3>
+                    <p>Each player says <strong>1 word</strong> associated with the secret word:<br>
+                    • <strong>Cryptic enough</strong> that imposters can't figure it out<br>
+                    • <strong>Clear enough</strong> that other players know you have the real word<br>
+                    • Imposters must bluff based on the category and other clues</p>
+                </div>
+                
+                <div class="instruction-step">
+                    <h3>🗳️ Voting Phase</h3>
+                    <p>After all clues are given:<br>
+                    • Vote for who you think is an imposter<br>
+                    • <strong>Majority vote</strong> eliminates that player<br>
+                    • Voted-out player reveals if they were Player or Imposter</p>
+                </div>
+                
+                <div class="instruction-step">
+                    <h3>🎯 Single Imposter</h3>
+                    <p><strong>If Imposter voted out:</strong> Gets 1 guess at secret word<br>
+                    • Correct guess = Imposter wins<br>
+                    • Wrong guess = Players win<br><br>
+                    <strong>If Player voted out:</strong> Second round of clues<br>
+                    • Find imposter = Players win<br>
+                    • Vote out another player = Imposter wins</p>
+                </div>
+                
+                <div class="instruction-step">
+                    <h3>👥 Multiple Imposters</h3>
+                    <p><strong>If Imposter voted out:</strong> ALL remaining imposters take turns guessing<br>
+                    • Any correct guess = All Imposters win<br>
+                    • All wrong guesses = Players win<br><br>
+                    <strong>If Player voted out:</strong> Continue to next round<br>
+                    • Maximum 2 rounds total<br>
+                    • No elimination after 2 rounds = Imposters win</p>
+                </div>
+            </div>
+            <button id="back-to-home-from-instructions" class="btn btn-primary">Got It!</button>
         </div>
 
         <!-- Setup Screen -->
@@ -21,11 +74,39 @@
             <div class="setup-form">
                 <div class="input-group">
                     <label for="num-players">Number of Players:</label>
-                    <input type="number" id="num-players" min="3" max="10" value="4">
+                    <div class="counter-control">
+                        <button type="button" class="counter-btn" id="players-minus">−</button>
+                        <div class="counter-display" id="players-display">4</div>
+                        <button type="button" class="counter-btn" id="players-plus">+</button>
+                    </div>
+                    <input type="hidden" id="num-players" value="4">
                 </div>
                 <div class="input-group">
                     <label for="num-imposters">Number of Imposters:</label>
-                    <input type="number" id="num-imposters" min="1" max="3" value="1">
+                    <div class="counter-control">
+                        <button type="button" class="counter-btn" id="imposters-minus">−</button>
+                        <div class="counter-display" id="imposters-display">1</div>
+                        <button type="button" class="counter-btn" id="imposters-plus">+</button>
+                    </div>
+                    <input type="hidden" id="num-imposters" value="1">
+                </div>
+                <div class="input-group category-group">
+                    <label for="category-select">Choose Category:</label>
+                    <select id="category-select" class="category-select">
+                        <option value="random">🎲 Random Category</option>
+                        <option value="Animals">🐘 Animals</option>
+                        <option value="Food & Drinks">🍕 Food & Drinks</option>
+                        <option value="Places & Buildings">🏰 Places & Buildings</option>
+                        <option value="Nature & Weather">🌊 Nature & Weather</option>
+                        <option value="Transportation">✈️ Transportation</option>
+                        <option value="Entertainment & Arts">🎭 Entertainment & Arts</option>
+                        <option value="Technology & Science">💻 Technology & Science</option>
+                        <option value="Sports & Activities">⚽ Sports & Activities</option>
+                        <option value="Objects & Tools">💎 Objects & Tools</option>
+                        <option value="Clothing & Fashion">👕 Clothing & Fashion</option>
+                        <option value="Emotions & Concepts">😊 Emotions & Concepts</option>
+                        <option value="Professions">👩‍⚕️ Professions</option>
+                    </select>
                 </div>
                 <button id="begin-game" class="btn btn-primary">Begin Game</button>
                 <button id="back-to-home" class="btn btn-secondary">Back</button>
@@ -40,16 +121,89 @@
                 <button id="view-role" class="btn btn-primary">View</button>
             </div>
             <div id="role-reveal" class="hidden">
-                <div id="role-display"></div>
-                <button id="next-player" class="btn btn-primary">Next Player</button>
+                <div id="role-container">
+                    <div id="role-display" class="hidden"></div>
+                    <div id="tap-to-reveal" class="tap-reveal-box">
+                        <p>👆 Tap to Reveal Your Role</p>
+                    </div>
+                </div>
+                <div id="category-display"></div>
+                <button id="next-player" class="btn btn-primary disabled">Next Player</button>
             </div>
         </div>
 
         <!-- Play Screen -->
         <div id="play-screen" class="screen">
+            <div id="imposter-wins-counter">
+                <p class="wins-display">Imposter Wins: <span id="wins-count">0</span></p>
+            </div>
             <h2>Ready to Play!</h2>
             <p class="instructions">All players have viewed their roles.<br>Now discuss and try to identify the imposters!</p>
-            <button id="start-discussion" class="btn btn-primary">Play</button>
+            <button id="start-discussion" class="btn btn-primary">Start Discussion</button>
+        </div>
+
+        <!-- Initial Voting Screen -->
+        <div id="voting-screen" class="screen">
+            <div id="imposter-wins-counter-voting">
+                <p class="wins-display">Imposter Wins: <span id="wins-count-voting">0</span></p>
+            </div>
+            <h2>🗳️ Round <span id="current-round">1</span> Voting</h2>
+            <p class="instructions">Did you reach a <span id="vote-type">unanimous</span> vote?</p>
+            <button id="vote-successful" class="btn btn-primary">Yes - Someone Eliminated</button>
+            <button id="vote-failed" class="btn btn-secondary">No - <span id="no-vote-action">Next Round</span></button>
+        </div>
+
+        <!-- Player Elimination Screen -->
+        <div id="elimination-screen" class="screen">
+            <div id="imposter-wins-counter-elimination">
+                <p class="wins-display">Imposter Wins: <span id="wins-count-elimination">0</span></p>
+            </div>
+            <h2>👤 Player Eliminated</h2>
+            <p class="instructions">What was the eliminated player's role?</p>
+            <button id="imposter-eliminated" class="btn btn-primary">IMPOSTER</button>
+            <button id="player-eliminated" class="btn btn-secondary">Regular Player</button>
+        </div>
+
+        <!-- Word Guessing Screen -->
+        <div id="word-guess-screen" class="screen">
+            <div id="imposter-wins-counter-guess">
+                <p class="wins-display">Imposter Wins: <span id="wins-count-guess">0</span></p>
+            </div>
+            <h2>🎯 Imposter's Final Guess</h2>
+            <p class="instructions">The eliminated imposter will now guess the secret word.</p>
+            <p class="instructions">After hearing their guess, did they get it right?</p>
+            <button id="guess-correct" class="btn btn-primary">Correct - Imposters Win</button>
+            <button id="guess-wrong" class="btn btn-secondary">Wrong - <span id="guess-result-text">Players Win</span></button>
+        </div>
+
+        <!-- Play Again Screen -->
+        <div id="play-again-screen" class="screen">
+            <div id="imposter-wins-counter-again">
+                <p class="wins-display">Imposter Wins: <span id="wins-count-again">0</span></p>
+            </div>
+            <h2>Play Another Round?</h2>
+            <div class="input-group">
+                <label for="category-select-again">Category:</label>
+                <select id="category-select-again">
+                    <option value="random">Random Category</option>
+                    <option value="Animals">Animals</option>
+                    <option value="Food & Drinks">Food & Drinks</option>
+                    <option value="Places & Buildings">Places & Buildings</option>
+                    <option value="Nature & Weather">Nature & Weather</option>
+                    <option value="Transportation">Transportation</option>
+                    <option value="Entertainment & Arts">Entertainment & Arts</option>
+                    <option value="Technology & Science">Technology & Science</option>
+                    <option value="Sports & Activities">Sports & Activities</option>
+                    <option value="Objects & Tools">Objects & Tools</option>
+                    <option value="Clothing & Fashion">Clothing & Fashion</option>
+                    <option value="Emotions & Concepts">Emotions & Concepts</option>
+                    <option value="Professions">Professions</option>
+                </select>
+            </div>
+            <p class="instructions">Pass the phone to Player 1<br><small>(Shift one person counter-clockwise from last round)</small></p>
+            <button id="start-new-round" class="btn btn-primary">Go Again</button>
+            <button id="new-game-setup" class="btn btn-secondary">Main Menu</button>
+            <button id="show-instructions-again" class="btn btn-secondary">Instructions</button>
         </div>
 
         <!-- Game Complete Screen -->
@@ -65,6 +219,6 @@
         </div>
     </div>
 
-    <script src="script.js?v=2.0"></script>
+    <script src="script.js?v=2.13"></script>
 </body>
 </html>
