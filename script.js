@@ -119,6 +119,7 @@ const WORD_LIST = Object.values(WORD_CATEGORIES).flat();
 const screens = {
     home: document.getElementById('home-screen'),
     instructions: document.getElementById('instructions-screen'),
+    releaseNotes: document.getElementById('release-notes-screen'),
     setup: document.getElementById('setup-screen'),
     player: document.getElementById('player-screen'),
     play: document.getElementById('play-screen'),
@@ -132,7 +133,9 @@ const screens = {
 const elements = {
     startGame: document.getElementById('start-game'),
     showInstructions: document.getElementById('show-instructions'),
+    showReleaseNotes: document.getElementById('show-release-notes'),
     backToHomeFromInstructions: document.getElementById('back-to-home-from-instructions'),
+    backToHomeFromReleaseNotes: document.getElementById('back-to-home-from-release-notes'),
     numPlayers: document.getElementById('num-players'),
     numImposters: document.getElementById('num-imposters'),
     playersDisplay: document.getElementById('players-display'),
@@ -494,7 +497,15 @@ elements.showInstructions.addEventListener('click', () => {
     showScreen('instructions');
 });
 
+elements.showReleaseNotes.addEventListener('click', () => {
+    showScreen('releaseNotes');
+});
+
 elements.backToHomeFromInstructions.addEventListener('click', () => {
+    showScreen('home');
+});
+
+elements.backToHomeFromReleaseNotes.addEventListener('click', () => {
     showScreen('home');
 });
 
