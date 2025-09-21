@@ -113,18 +113,105 @@ h2 {
     color: #4a5568;
 }
 
-.input-group input {
+.input-group input, .input-group select {
     width: 100%;
     padding: 12px 15px;
     border: 2px solid #e2e8f0;
     border-radius: 8px;
     font-size: 1rem;
     transition: border-color 0.3s ease;
+    background: white;
 }
 
-.input-group input:focus {
+.input-group input:focus, .input-group select:focus {
     outline: none;
     border-color: #667eea;
+}
+
+/* Counter controls */
+.counter-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.counter-display {
+    width: 100px;
+    height: 60px;
+    border: 3px solid #667eea;
+    border-radius: 12px;
+    background: #f7fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4a5568;
+}
+
+.counter-btn {
+    width: 60px;
+    height: 60px;
+    border: 3px solid #667eea;
+    border-radius: 12px;
+    background: white;
+    color: #667eea;
+    font-size: 2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+}
+
+.counter-btn:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.counter-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+/* Category dropdown improvements */
+.category-group {
+    margin: 30px 0;
+}
+
+.category-select {
+    width: 100% !important;
+    padding: 18px 20px !important;
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
+    text-align: center;
+    border: 3px solid #667eea !important;
+    border-radius: 15px !important;
+    background: white !important;
+    color: #4a5568 !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-select:hover {
+    background: #f7fafc !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+}
+
+.category-select:focus {
+    outline: none !important;
+    border-color: #764ba2 !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 /* Player screen */
@@ -136,12 +223,17 @@ h2 {
     margin: 30px 0;
 }
 
+/* Role container with tap-to-reveal */
+#role-container {
+    position: relative;
+    margin: 20px 0;
+}
+
 #role-display {
     background: #f7fafc;
     border: 3px solid #e2e8f0;
     border-radius: 15px;
     padding: 40px;
-    margin: 20px 0;
     font-size: 1.8rem;
     font-weight: 700;
     min-height: 120px;
@@ -161,6 +253,56 @@ h2 {
     color: #e53e3e;
     border-color: #e53e3e;
     background: #fff5f5;
+}
+
+/* Tap to reveal box */
+.tap-reveal-box {
+    background: #e2e8f0;
+    border: 3px dashed #a0aec0;
+    border-radius: 15px;
+    padding: 60px 40px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 150px;
+}
+
+.tap-reveal-box p {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #718096;
+    text-align: center;
+    margin: 0;
+}
+
+.tap-reveal-box:hover {
+    background: #cbd5e0;
+    border-color: #667eea;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.tap-reveal-box:hover p {
+    color: #667eea;
+}
+
+/* Category display */
+#category-display {
+    text-align: center;
+    margin: 15px 0;
+    font-size: 1.2rem;
+    color: #666;
+    font-weight: 500;
+}
+
+/* Disabled button */
+.btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
 }
 
 /* Game complete screen */
@@ -187,6 +329,56 @@ h2 {
     color: #4a5568;
     margin: 25px 0;
     font-style: italic;
+}
+
+/* Instructions screen */
+.instructions-content {
+    text-align: left;
+    margin: 30px 0;
+}
+
+.instruction-step {
+    background: #f7fafc;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-left: 4px solid #667eea;
+}
+
+.instruction-step h3 {
+    margin: 0 0 10px 0;
+    color: #4a5568;
+    font-size: 1.3rem;
+}
+
+.instruction-step p {
+    margin: 0;
+    line-height: 1.6;
+    color: #718096;
+    font-size: 1rem;
+}
+
+.instruction-step strong {
+    color: #4a5568;
+    font-weight: 700;
+}
+
+/* Wins counter */
+.wins-display {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #667eea;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #f7fafc;
+    border-radius: 8px;
+    border: 2px solid #e2e8f0;
+}
+
+#wins-count, #wins-count-voting, #wins-count-again {
+    color: #e53e3e;
+    font-weight: 700;
 }
 
 /* Utility classes */
